@@ -3,53 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Emagrecimento</title>
+    <title>Desafio Verão 21 Dias - Carol Alves</title>
     <style>
-        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
-        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        h2 { color: #007bff; text-align: center; }
+        :root {
+            --primary: #FF7F50; /* Coral Verão */
+            --secondary: #40E0D0; /* Turquesa */
+            --dark: #2F4F4F;
+            --light: #F9F9F9;
+            --success: #27ae60;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
+        
+        /* Header & Hero */
+        header { background: linear-gradient(135deg, var(--primary), #FF6347); color: white; padding: 40px 20px; text-align: center; }
+        h1 { margin: 0; font-size: 2.2rem; line-height: 1.2; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+
+        /* Calculadora */
+        .section-card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-top: -50px; }
         .field { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 10px; }
-        button:hover { background: #219150; }
-        #resultado { margin-top: 20px; padding: 15px; border-radius: 5px; display: none; background: #e8f5e9; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-size: 1rem; transition: 0.3s; }
+        input:focus { border-color: var(--secondary); outline: none; }
+        
+        .btn-calc { width: 100%; padding: 15px; background: var(--dark); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+        #resultado { margin-top: 20px; padding: 15px; border-radius: 10px; display: none; background: #e0f2f1; border-left: 5px solid var(--secondary); }
+
+        /* História Carol Alves */
+        .story-section { background: white; padding: 30px; border-radius: 20px; margin-top: 30px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .story-img { width: 120px; height: 120px; background: #ddd; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); }
+        .story-text h3 { margin-top: 0; color: var(--primary); }
+
+        /* O que vem no Desafio */
+        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+        .feature-item { background: #fff; padding: 15px; border-radius: 10px; border-bottom: 3px solid var(--primary); }
+
+        /* Quiz Section */
+        #quiz-section { display: none; background: #fffbe6; padding: 25px; border-radius: 20px; margin-top: 30px; border: 2px dashed var(--primary); }
+        .quiz-option { display: block; background: white; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; }
+        .quiz-option:hover { background: #fff0eb; }
+
+        /* Checkout Area */
+        #checkout-area { display: none; text-align: center; margin-top: 40px; padding: 30px; background: white; border-radius: 20px; border: 3px solid var(--success); }
+        .price { font-size: 3rem; font-weight: bold; color: var(--success); margin: 10px 0; }
+        .old-price { text-decoration: line-through; color: #999; }
+        .btn-buy { background: var(--success); color: white; padding: 20px 40px; border-radius: 50px; font-size: 1.5rem; text-decoration: none; display: inline-block; font-weight: bold; box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4); animation: pulse 2s infinite; }
+
+        /* Depoimentos */
+        .testimonial { background: #eee; padding: 15px; border-radius: 10px; margin: 10px 0; font-style: italic; font-size: 0.9rem; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Calculadora Fitness</h2>
-    
-    <div class="field">
-        <label>Gênero</label>
-        <select id="genero">
-            <option value="m">Masculino</option>
-            <option value="f">Feminino</option>
-        </select>
+<header>
+    <h1>Desafio Verão 21 Dias</h1>
+    <p class="subtitle">Descubra sua meta calórica e receba seu plano alimentar pronto!</p>
+</header>
+
+<div class="container">
+    <!-- CALCULADORA -->
+    <div class="section-card">
+        <h2 style="text-align:center; color: var(--primary);">Passo 1: Diagnóstico Grátis</h2>
+        <div class="field">
+            <label>Peso Atual (kg)</label>
+            <input type="number" id="peso" placeholder="Ex: 75">
+        </div>
+        <div class="field">
+            <label>Altura (cm)</label>
+            <input type="number" id="altura" placeholder="Ex: 165">
+        </div>
+        <div class="field">
+            <label>Idade</label>
+            <input type="number" id="idade" placeholder="Ex: 30">
+        </div>
+        <div class="field">
+            <label>Gênero</label>
+            <select id="genero">
+                <option value="f">Feminino</option>
+                <option value="m">Masculino</option>
+            </select>
+        </div>
+        <button class="btn-calc" onclick="calcular()">CALCULAR MEUS RESULTADOS</button>
+
+        <div id="resultado"></div>
     </div>
 
-    <div class="field">
-        <label>Idade</label>
-        <input type="number" id="idade" placeholder="Ex: 25">
+    <!-- HISTÓRIA -->
+    <div class="story-section">
+        <div class="story-text">
+            <h3>Conheça Carol Alves</h3>
+            <p><strong>Desenvolvedora & Entusiasta Fitness.</strong> Carol passou anos lutando contra o efeito sanfona enquanto trabalhava horas sentada programando. Ela usou sua habilidade em dados para criar um sistema de dieta que não falha. "Eu não queria apenas uma planilha, eu queria algo que medisse meu progresso real", diz Carol.</p>
+        </div>
     </div>
 
-    <div class="field">
-        <label>Peso (kg)</label>
-        <input type="number" id="peso" placeholder="Ex: 80">
+    <!-- O QUE VEM NO PRODUTO -->
+    <h2 style="text-align:center; margin-top:40px;">O que você recebe no Desafio:</h2>
+    <div class="features">
+        <div class="feature-item">🚀 <strong>Micro-App de Progresso:</strong> Marque suas refeições e veja sua evolução diária.</div>
+        <div class="feature-item">🥗 <strong>Dieta Pronta:</strong> Cardápios fáceis e baratos para 21 dias.</div>
+        <div class="feature-item">💧 <strong>Controle de Hidratação:</strong> Calcule e acompanhe sua ingestão de água.</div>
+        <div class="feature-item">📱 <strong>Acesso Mobile:</strong> Use direto do celular como um aplicativo.</div>
     </div>
 
-    <div class="field">
-        <label>Altura (cm)</label>
-        <input type="number" id="altura" placeholder="Ex: 175">
+    <!-- QUIZ -->
+    <div id="quiz-section">
+        <h3 id="quiz-title">Pergunta 1: Qual seu nível de cansaço diário?</h3>
+        <div id="quiz-options">
+            <div class="quiz-option" onclick="proximaPergunta()">A) Acordo cansada e sem energia.</div>
+            <div class="quiz-option" onclick="proximaPergunta()">B) Sinto sono logo após o almoço.</div>
+            <div class="quiz-option" onclick="proximaPergunta()">C) Meu metabolismo parece estar parado.</div>
+        </div>
     </div>
 
-    <button onclick="calcular()">Calcular Agora</button>
+    <!-- CHECKOUT -->
+    <div id="checkout-area">
+        <h2>✅ Plano Liberado para você!</h2>
+        <p>Baseado nos seus dados, você pode perder até 5kg nos próximos 21 dias.</p>
+        <span class="old-price">De R$ 97,00</span>
+        <div class="price">R$ 47,00</div>
+        <p><strong>Aproveite os Benefícios:</strong><br>
+        • Guia de Substituições • Lista de Compras Econômica • Suporte Vitalício</p>
+        <a href="SEU_LINK_DA_KIRVANO_AQUI" class="btn-buy">QUERO COMEÇAR AGORA</a>
+        <p style="margin-top:20px;"><img src="https://flaticon.com" width="20"> <strong>Garantia Total de 7 Dias</strong></p>
+    </div>
 
-    <div id="resultado"></div>
+    <!-- DEPOIMENTOS -->
+    <div style="margin-top:40px;">
+        <h3 style="text-align:center;">O que dizem nossas alunas:</h3>
+        <div class="testimonial">"A calculadora da Carol foi o que me abriu os olhos. Em 2 semanas perdi 3kg apenas seguindo o app!" - Mariana S.</div>
+        <div class="testimonial">"Finalmente uma dieta que não precisa de comida cara. O micro-app de progresso é viciante." - Roberta L.</div>
+    </div>
+
 </div>
 
+<footer style="text-align:center; padding:40px; font-size: 0.8rem; color: #777;">
+    &copy; 2024 Desafio Verão Carol Alves. Todos os direitos reservados.
+</footer>
+
 <script>
+    let etapaQuiz = 1;
+
     function calcular() {
         const genero = document.getElementById('genero').value;
         const idade = Number(document.getElementById('idade').value);
@@ -58,27 +162,30 @@
         const resDiv = document.getElementById('resultado');
 
         if(!idade || !peso || !altura) {
-            alert("Por favor, preencha todos os campos.");
+            alert("Preencha seus dados para o diagnóstico!");
             return;
         }
 
-        // Cálculo IMC
         const imc = (peso / ((altura/100) * (altura/100))).toFixed(1);
-        
-        // Cálculo Taxa Metabólica Basal (Mifflin-St Jeor)
-        let tmb;
-        if(genero === 'm') {
-            tmb = (10 * peso) + (6.25 * altura) - (5 * idade) + 5;
-        } else {
-            tmb = (10 * peso) + (6.25 * altura) - (5 * idade) - 161;
-        }
-
         resDiv.style.display = 'block';
-        resDiv.innerHTML = `
-            <strong>Seu IMC:</strong> ${imc}<br>
-            <strong>Gasto Calórico Base:</strong> ${tmb.toFixed(0)} kcal/dia<br><br>
-            <small>*Para emagrecer, consuma menos que seu gasto base ou aumente exercícios.</small>
-        `;
+        resDiv.innerHTML = `<strong>Seu diagnóstico está pronto!</strong><br>Seu IMC é ${imc}.<br><br>Role para baixo para liberar seu plano personalizado.`;
+        
+        document.getElementById('quiz-section').style.display = 'block';
+        window.scrollTo({ top: document.getElementById('quiz-section').offsetTop - 50, behavior: 'smooth' });
+    }
+
+    function proximaPergunta() {
+        if(etapaQuiz === 1) {
+            document.getElementById('quiz-title').innerText = "Pergunta 2: Já tentou outras dietas antes?";
+            etapaQuiz++;
+        } else if(etapaQuiz === 2) {
+            document.getElementById('quiz-title').innerText = "Pergunta 3: Está disposta a seguir o plano por 21 dias?";
+            etapaQuiz++;
+        } else {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('checkout-area').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('checkout-area').offsetTop - 50, behavior: 'smooth' });
+        }
     }
 </script>
 
