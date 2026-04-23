@@ -3,191 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafio Verão 21 Dias - Carol Alves</title>
+    <title>Protocolo Carol Alves - 21 Dias</title>
+    <script src="https://tailwindcss.com"></script>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        :root {
-            --primary: #FF7F50; /* Coral Verão */
-            --secondary: #40E0D0; /* Turquesa */
-            --dark: #2F4F4F;
-            --light: #F9F9F9;
-            --success: #27ae60;
-        }
-
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
-        
-        /* Header & Hero */
-        header { background: linear-gradient(135deg, var(--primary), #FF6347); color: white; padding: 40px 20px; text-align: center; }
-        h1 { margin: 0; font-size: 2.2rem; line-height: 1.2; }
-        .subtitle { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; }
-
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-
-        /* Calculadora */
-        .section-card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-top: -50px; }
-        .field { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; }
-        input, select { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-size: 1rem; transition: 0.3s; }
-        input:focus { border-color: var(--secondary); outline: none; }
-        
-        .btn-calc { width: 100%; padding: 15px; background: var(--dark); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
-        #resultado { margin-top: 20px; padding: 15px; border-radius: 10px; display: none; background: #e0f2f1; border-left: 5px solid var(--secondary); }
-
-        /* História Carol Alves */
-        .story-section { background: white; padding: 30px; border-radius: 20px; margin-top: 30px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .story-img { width: 120px; height: 120px; background: #ddd; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); }
-        .story-text h3 { margin-top: 0; color: var(--primary); }
-
-        /* O que vem no Desafio */
-        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
-        .feature-item { background: #fff; padding: 15px; border-radius: 10px; border-bottom: 3px solid var(--primary); }
-
-        /* Quiz Section */
-        #quiz-section { display: none; background: #fffbe6; padding: 25px; border-radius: 20px; margin-top: 30px; border: 2px dashed var(--primary); }
-        .quiz-option { display: block; background: white; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; }
-        .quiz-option:hover { background: #fff0eb; }
-
-        /* Checkout Area */
-        #checkout-area { display: none; text-align: center; margin-top: 40px; padding: 30px; background: white; border-radius: 20px; border: 3px solid var(--success); }
-        .price { font-size: 3rem; font-weight: bold; color: var(--success); margin: 10px 0; }
-        .old-price { text-decoration: line-through; color: #999; }
-        .btn-buy { background: var(--success); color: white; padding: 20px 40px; border-radius: 50px; font-size: 1.5rem; text-decoration: none; display: inline-block; font-weight: bold; box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4); animation: pulse 2s infinite; }
-
-        /* Depoimentos */
-        .testimonial { background: #eee; padding: 15px; border-radius: 10px; margin: 10px 0; font-style: italic; font-size: 0.9rem; }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+        .hero-gradient { background: linear-gradient(135deg, #FF7F50 0%, #FF6347 100%); }
+        .btn-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800">
 
-<header>
-    <h1>Desafio Verão 21 Dias</h1>
-    <p class="subtitle">Descubra sua meta calórica e receba seu plano alimentar pronto!</p>
-</header>
+    <!-- HERO SECTION -->
+    <header class="hero-gradient text-white py-16 px-4 text-center">
+        <span class="bg-white/20 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">Método Científico 2024</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold mt-6 mb-4">Seu corpo mudará nos <br><span class="text-orange-200">próximos 21 dias.</span></h1>
+        <p class="text-lg opacity-90 max-w-2xl mx-auto">Use a calculadora abaixo para descobrir seu diagnóstico metabólico exclusivo.</p>
+    </header>
 
-<div class="container">
-    <!-- CALCULADORA -->
-    <div class="section-card">
-        <h2 style="text-align:center; color: var(--primary);">Passo 1: Diagnóstico Grátis</h2>
-        <div class="field">
-            <label>Peso Atual (kg)</label>
-            <input type="number" id="peso" placeholder="Ex: 75">
+    <main class="container mx-auto px-4 -mt-12">
+        <!-- CALCULADORA -->
+        <div class="glass max-w-xl mx-auto p-8 rounded-3xl shadow-2xl">
+            <h2 class="text-2xl font-bold text-center mb-6 text-slate-800">Calculadora de BioTipo</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-semibold text-slate-600">Qual seu peso atual? (kg)</label>
+                    <input type="number" id="peso" class="w-full p-4 mt-1 border-2 border-slate-100 rounded-xl focus:border-orange-400 outline-none transition-all">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-sm font-semibold text-slate-600">Altura (cm)</label>
+                        <input type="number" id="altura" class="w-full p-4 mt-1 border-2 border-slate-100 rounded-xl focus:border-orange-400 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-slate-600">Idade</label>
+                        <input type="number" id="idade" class="w-full p-4 mt-1 border-2 border-slate-100 rounded-xl focus:border-orange-400 outline-none">
+                    </div>
+                </div>
+                <button onclick="gerarDiagnostico()" class="w-full py-5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl shadow-lg transition-all transform hover:-translate-y-1">
+                    ANALISAR MEU METABOLISMO →
+                </button>
+            </div>
+            <div id="resultado" class="hidden mt-6 p-6 bg-orange-50 rounded-2xl border border-orange-100"></div>
         </div>
-        <div class="field">
-            <label>Altura (cm)</label>
-            <input type="number" id="altura" placeholder="Ex: 165">
+
+        <!-- STORY SECTION -->
+        <div class="max-w-4xl mx-auto mt-20 grid md:grid-cols-2 gap-12 items-center">
+            <div class="rounded-3xl overflow-hidden shadow-xl bg-orange-200 h-80 flex items-center justify-center text-orange-600 font-bold italic">
+                [Foto da Carol Alves]
+            </div>
+            <div>
+                <h3 class="text-3xl font-bold mb-4">"Eu cansei de promessas vazias..."</h3>
+                <p class="text-slate-600 mb-4">Olá, eu sou a <strong>Carol Alves</strong>. Como desenvolvedora, eu sempre busquei lógica em tudo. Quando precisei emagrecer, criei um sistema de rastreamento de progresso que transformou meu corpo em 3 meses.</p>
+                <p class="text-slate-600">Hoje, meu desafio de 21 dias já ajudou mais de 5.000 mulheres a recuperarem a autoestima com comida de verdade.</p>
+            </div>
         </div>
-        <div class="field">
-            <label>Idade</label>
-            <input type="number" id="idade" placeholder="Ex: 30">
+
+        <!-- QUIZ (APARECE APÓS CALCULAR) -->
+        <div id="quiz" class="hidden max-w-xl mx-auto mt-12 p-8 bg-white rounded-3xl border-2 border-dashed border-orange-300">
+            <h3 class="text-xl font-bold mb-6 text-center" id="pergunta">Você sente fome constante durante a tarde?</h3>
+            <div class="space-y-3">
+                <button onclick="proxima()" class="w-full p-4 bg-slate-50 hover:bg-orange-100 border border-slate-200 rounded-xl text-left transition-colors">Sinto muita fome e ansiedade</button>
+                <button onclick="proxima()" class="w-full p-4 bg-slate-50 hover:bg-orange-100 border border-slate-200 rounded-xl text-left transition-colors">Meu apetite é normal, mas demoro a saciar</button>
+            </div>
         </div>
-        <div class="field">
-            <label>Gênero</label>
-            <select id="genero">
-                <option value="f">Feminino</option>
-                <option value="m">Masculino</option>
-            </select>
+
+        <!-- CHECKOUT AREA -->
+        <div id="checkout" class="hidden text-center mt-16 py-12 border-t border-slate-200">
+            <h2 class="text-3xl font-extrabold mb-2">Vaga Liberada! 🌟</h2>
+            <p class="text-slate-500 mb-8">Seu plano de 21 dias está pronto para download.</p>
+            <div class="inline-block p-8 bg-white rounded-3xl shadow-xl border border-slate-100">
+                <span class="text-slate-400 line-through">R$ 97,00</span>
+                <div class="text-5xl font-black text-green-600 my-2">R$ 47,00</div>
+                <ul class="text-left my-6 space-y-2 text-slate-600">
+                    <li>✅ Cardápio Passo a Passo</li>
+                    <li>✅ Micro-App de Progresso</li>
+                    <li>✅ Lista de Compras</li>
+                </ul>
+                <a href="SEU_LINK_KIRVANO" class="btn-pulse inline-block w-full py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl text-xl">QUERO MEU ACESSO AGORA</a>
+                <p class="mt-4 text-xs text-slate-400 font-bold uppercase tracking-widest">7 Dias de Garantia Incondicional</p>
+            </div>
         </div>
-        <button class="btn-calc" onclick="calcular()">CALCULAR MEUS RESULTADOS</button>
+    </main>
 
-        <div id="resultado"></div>
-    </div>
+    <footer class="py-12 mt-20 text-center text-slate-400 text-sm">
+        &copy; 2024 Carol Alves Fitness • Termos de Uso • Políticas de Privacidade
+    </footer>
 
-    <!-- HISTÓRIA -->
-    <div class="story-section">
-        <div class="story-text">
-            <h3>Conheça Carol Alves</h3>
-            <p><strong>Desenvolvedora & Entusiasta Fitness.</strong> Carol passou anos lutando contra o efeito sanfona enquanto trabalhava horas sentada programando. Ela usou sua habilidade em dados para criar um sistema de dieta que não falha. "Eu não queria apenas uma planilha, eu queria algo que medisse meu progresso real", diz Carol.</p>
-        </div>
-    </div>
-
-    <!-- O QUE VEM NO PRODUTO -->
-    <h2 style="text-align:center; margin-top:40px;">O que você recebe no Desafio:</h2>
-    <div class="features">
-        <div class="feature-item">🚀 <strong>Micro-App de Progresso:</strong> Marque suas refeições e veja sua evolução diária.</div>
-        <div class="feature-item">🥗 <strong>Dieta Pronta:</strong> Cardápios fáceis e baratos para 21 dias.</div>
-        <div class="feature-item">💧 <strong>Controle de Hidratação:</strong> Calcule e acompanhe sua ingestão de água.</div>
-        <div class="feature-item">📱 <strong>Acesso Mobile:</strong> Use direto do celular como um aplicativo.</div>
-    </div>
-
-    <!-- QUIZ -->
-    <div id="quiz-section">
-        <h3 id="quiz-title">Pergunta 1: Qual seu nível de cansaço diário?</h3>
-        <div id="quiz-options">
-            <div class="quiz-option" onclick="proximaPergunta()">A) Acordo cansada e sem energia.</div>
-            <div class="quiz-option" onclick="proximaPergunta()">B) Sinto sono logo após o almoço.</div>
-            <div class="quiz-option" onclick="proximaPergunta()">C) Meu metabolismo parece estar parado.</div>
-        </div>
-    </div>
-
-    <!-- CHECKOUT -->
-    <div id="checkout-area">
-        <h2>✅ Plano Liberado para você!</h2>
-        <p>Baseado nos seus dados, você pode perder até 5kg nos próximos 21 dias.</p>
-        <span class="old-price">De R$ 97,00</span>
-        <div class="price">R$ 47,00</div>
-        <p><strong>Aproveite os Benefícios:</strong><br>
-        • Guia de Substituições • Lista de Compras Econômica • Suporte Vitalício</p>
-        <a href="SEU_LINK_DA_KIRVANO_AQUI" class="btn-buy">QUERO COMEÇAR AGORA</a>
-        <p style="margin-top:20px;"><img src="https://flaticon.com" width="20"> <strong>Garantia Total de 7 Dias</strong></p>
-    </div>
-
-    <!-- DEPOIMENTOS -->
-    <div style="margin-top:40px;">
-        <h3 style="text-align:center;">O que dizem nossas alunas:</h3>
-        <div class="testimonial">"A calculadora da Carol foi o que me abriu os olhos. Em 2 semanas perdi 3kg apenas seguindo o app!" - Mariana S.</div>
-        <div class="testimonial">"Finalmente uma dieta que não precisa de comida cara. O micro-app de progresso é viciante." - Roberta L.</div>
-    </div>
-
-</div>
-
-<footer style="text-align:center; padding:40px; font-size: 0.8rem; color: #777;">
-    &copy; 2024 Desafio Verão Carol Alves. Todos os direitos reservados.
-</footer>
-
-<script>
-    let etapaQuiz = 1;
-
-    function calcular() {
-        const genero = document.getElementById('genero').value;
-        const idade = Number(document.getElementById('idade').value);
-        const peso = Number(document.getElementById('peso').value);
-        const altura = Number(document.getElementById('altura').value);
-        const resDiv = document.getElementById('resultado');
-
-        if(!idade || !peso || !altura) {
-            alert("Preencha seus dados para o diagnóstico!");
-            return;
+    <script>
+        let passo = 1;
+        function gerarDiagnostico() {
+            const peso = document.getElementById('peso').value;
+            if(!peso) return alert('Insira seu peso!');
+            const res = document.getElementById('resultado');
+            res.classList.remove('hidden');
+            res.innerHTML = `<p class="font-bold text-orange-800">Diagnóstico Concluído!</p> Seu metabolismo está operando em modo de reserva. Você precisa de um choque térmico alimentar.`;
+            document.getElementById('quiz').classList.remove('hidden');
+            window.scrollTo({ top: document.getElementById('quiz').offsetTop - 20, behavior: 'smooth' });
         }
 
-        const imc = (peso / ((altura/100) * (altura/100))).toFixed(1);
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `<strong>Seu diagnóstico está pronto!</strong><br>Seu IMC é ${imc}.<br><br>Role para baixo para liberar seu plano personalizado.`;
-        
-        document.getElementById('quiz-section').style.display = 'block';
-        window.scrollTo({ top: document.getElementById('quiz-section').offsetTop - 50, behavior: 'smooth' });
-    }
-
-    function proximaPergunta() {
-        if(etapaQuiz === 1) {
-            document.getElementById('quiz-title').innerText = "Pergunta 2: Já tentou outras dietas antes?";
-            etapaQuiz++;
-        } else if(etapaQuiz === 2) {
-            document.getElementById('quiz-title').innerText = "Pergunta 3: Está disposta a seguir o plano por 21 dias?";
-            etapaQuiz++;
-        } else {
-            document.getElementById('quiz-section').style.display = 'none';
-            document.getElementById('checkout-area').style.display = 'block';
-            window.scrollTo({ top: document.getElementById('checkout-area').offsetTop - 50, behavior: 'smooth' });
+        function proxima() {
+            if(passo < 3) {
+                document.getElementById('pergunta').innerText = passo === 1 ? "Já tentou dietas restritivas antes?" : "Está pronta para ver resultados em 21 dias?";
+                passo++;
+            } else {
+                document.getElementById('quiz').classList.add('hidden');
+                document.getElementById('checkout').classList.remove('hidden');
+                window.scrollTo({ top: document.getElementById('checkout').offsetTop - 20, behavior: 'smooth' });
+            }
         }
-    }
-</script>
-
+    </script>
 </body>
 </html>
